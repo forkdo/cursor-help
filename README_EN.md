@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Release](https://img.shields.io/github/v/release/Nikitosshow/cursor-help?style=flat-square&logo=github&color=blue)](https://github.com/Nikitosshow/cursor-help/releases/latest)
-[![Stars](https://img.shields.io/github/stars/Nikitosshow/cursor-help?style=flat-square&logo=github)](https://github.com/Nikitosshow/cursor-help/stargazers)
+![Stars](https://img.shields.io/github/stars/Nikitosshow/cursor-help?style=flat-square&logo=github&label=stars)
 
 ### 🌐 Translations
 [⭐ English](README_EN.md) | [⭐ 中文](README_CN.md) | [⭐ Русский](README.md)
