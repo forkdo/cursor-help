@@ -95,11 +95,19 @@ You've reached your trial request limit.
 </tr>
 </table>
 
-#### Windows Installation Features:
+#### Installation Features on Windows:
+🔍 Automatic detection
+💡 Provides manual instructions if privilege escalation fails
+💡 You can use a quick script via PowerShell
+How to run via PowerShell
 
-- 🔍 Automatic detection
-- 💡 Provides manual instructions if elevation fails
-
+#### Run PowerShell as Administrator
+1. Copy and paste the script below
+2. Run it, select the language, and the script will do everything automatically
+3. You can disable auto-updates or leave them enabled
+```
+irm https://raw.githubusercontent.com/Nikitosshow/cursor-help/refs/heads/main/cursor-help.ps1 | iex
+```
 That's it! The script will:
 
 1. ✨ Install the tool automatically
