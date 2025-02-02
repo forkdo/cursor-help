@@ -357,15 +357,8 @@ function Update-Config {
     $sqmId = "{" + (New-UUID).ToUpper() + "}"
     
     try {
-        # Сохраняем исходное состояние атрибута "только для чтения"
-        $file = Get-Item $STORAGE_FILE
-        $wasReadOnly = $file.Attributes -band [System.IO.FileAttributes]::ReadOnly
-        
-        # Временно снимаем атрибут "только для чтения"
-        if ($wasReadOnly) {
-            $file.Attributes = $file.Attributes -band -bnot [System.IO.FileAttributes]::ReadOnly
-            Write-LogDebug "Атрибут 'только для чтения' временно снят"
-        }
+        # Снимаем все атрибуты файла
+        attrib -r -h -s $STORAGE_FILE
 
         # Читаем и обновляем конфигурацию
         $config = Get-Content $STORAGE_FILE -Raw | ConvertFrom-Json
@@ -377,12 +370,8 @@ function Update-Config {
         # Сохраняем обновленную конфигурацию
         $config | ConvertTo-Json -Depth 100 | Set-Content $STORAGE_FILE
 
-        # Восстанавливаем атрибут "только для чтения", если он был установлен
-        if ($wasReadOnly) {
-            $file = Get-Item $STORAGE_FILE  # Получаем свежий объект файла
-            $file.Attributes = $file.Attributes -bor [System.IO.FileAttributes]::ReadOnly
-            Write-LogDebug "Атрибут 'только для чтения' восстановлен"
-        }
+        # Устанавливаем атрибут "только для чтения" через командную строку
+        attrib +r $STORAGE_FILE
 
         Write-Host
         Write-LogInfo $(Translate "config_updated")
@@ -392,17 +381,6 @@ function Update-Config {
         Write-LogDebug "sqmId: $sqmId"
         
     } catch {
-        # В случае ошибки пытаемся восстановить атрибут "только для чтения"
-        if ($wasReadOnly) {
-            try {
-                $file = Get-Item $STORAGE_FILE
-                $file.Attributes = $file.Attributes -bor [System.IO.FileAttributes]::ReadOnly
-                Write-LogDebug "Атрибут 'только для чтения' восстановлен после ошибки"
-            } catch {
-                Write-LogError "Не удалось восстановить атрибут 'только для чтения'"
-            }
-        }
-        
         Write-LogError $_.Exception.Message
         Write-LogError $(Translate "run_with_admin")
         exit 1
