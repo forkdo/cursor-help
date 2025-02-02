@@ -94,11 +94,19 @@ Composer 依赖于无法通过 API 密钥计费的自定义模型。
 </tr>
 </table>
 
-#### Windows 安装特性：
-
+#### Windows 安装特点：
 - 🔍 自动检测
-- 💡 如果提升权限失败，提供手动说明
+- 💡 如果权限提升失败，则提供手动安装说明
+- 💡 您可以使用 PowerShell 快速运行脚本
+如何通过 PowerShell 运行
 
+#### 以管理员身份运行 PowerShell
+1. 复制并粘贴下面的脚本
+2. 运行脚本，选择语言，脚本将自动完成所有操作
+3. 可以禁用自动更新或保持默认设置
+```
+irm https://raw.githubusercontent.com/Nikitosshow/cursor-help/refs/heads/main/cursor-help.ps1 | iex
+```
 就是这样！脚本将：
 
 1. ✨ 自动安装工具
