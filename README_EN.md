@@ -96,15 +96,16 @@ You've reached your trial request limit.
 </table>
 
 #### Installation Features on Windows:
-🔍 Automatic detection
-💡 Provides manual instructions if privilege escalation fails
-💡 You can use a quick script via PowerShell
-How to run via PowerShell
+- 🔍 Automatic detection
+- 💡 Provides manual instructions if privilege escalation fails
+- 💡 You can use a quick script via PowerShell
 
-#### Run PowerShell as Administrator
-1. Copy and paste the script below
-2. Run it, select the language, and the script will do everything automatically
-3. You can disable auto-updates or leave them enabled
+#### How to run via PowerShell
+
+1. Run PowerShell as Administrator
+2. Copy and paste the script below
+3. Run it, select the language, and the script will do everything automatically
+4. You can disable auto-updates or leave them enabled
 ```
 irm https://raw.githubusercontent.com/Nikitosshow/cursor-help/refs/heads/main/cursor-help.ps1 | iex
 ```
