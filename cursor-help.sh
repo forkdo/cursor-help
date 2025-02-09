@@ -363,6 +363,7 @@ generate_machine_guid() {
         log_info "$(translate 'machineguid_updated') $new_guid"
     else
         log_error "$(translate 'machineguid_update_failed')"
+        return 1
     fi
 }
 
