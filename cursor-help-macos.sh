@@ -253,16 +253,9 @@ if [ -z "$CURRENT_USER" ]; then
     exit 1
 fi
 
-OS="$(uname | tr '[:upper:]' '[:lower:]')"
-
 # Пути к файлам
-CURSOR_CONFIG_PATH="$HOME/Library/Application Support"
-if [ "$OS" = "linux" ]; then
-    CURSOR_CONFIG_PATH="$HOME/.config"
-fi
-
-STORAGE_FILE="${CURSOR_CONFIG_PATH}/Cursor/User/globalStorage/storage.json"
-BACKUP_DIR="${CURSOR_CONFIG_PATH}/Cursor/User/globalStorage/backups"
+STORAGE_FILE="$HOME/Library/Application Support/Cursor/User/globalStorage/storage.json"
+BACKUP_DIR="$HOME/Library/Application Support/Cursor/User/globalStorage/backups"
 
 # Проверка прав
 check_permissions() {
@@ -380,7 +373,7 @@ generate_new_config() {
         log_error "$(translate 'config_not_found') $STORAGE_FILE"
         log_warn "$(translate 'install_first')"
         exit 1
-    fi
+    }
     
     # Сохраняем текущие права доступа
     local current_perms=$(stat -f "%A" "$STORAGE_FILE" 2>/dev/null)
@@ -496,7 +489,7 @@ disable_auto_update() {
             log_error "$(translate "rights_check_failed")"
             show_manual_guide
             return 1
-        fi
+        }
         
         log_info "$(translate "update_disabled")"
     else
@@ -541,17 +534,10 @@ main() {
     echo -e "${YELLOW}[$(translate "important")]${NC} $(translate "version_support")"
     echo
     
-    if [ "$OS" != "linux" ]; then
-        check_permissions
-    fi
-
+    check_permissions
     check_and_kill_cursor
     backup_config
-    
-    if [ "$OS" != "linux" ]; then
-        generate_machine_guid
-    fi
-    
+    generate_machine_guid
     generate_new_config
     
     echo
@@ -560,9 +546,7 @@ main() {
     show_follow_info
     log_info "$(translate "restart_required")"
     
-    if [ "$OS" != "linux" ]; then
-        disable_auto_update
-    fi
+    disable_auto_update
 }
 
 main
